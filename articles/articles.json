@@ -1,0 +1,23 @@
+[
+  {
+    "id": "javascript-basics",
+    "title": "JavaScript Basics",
+    "description": "A simple introduction to variables, functions, and events in JavaScript.",
+    "date": "June 2026",
+    "file": "javascript-basics.html"
+  },
+  {
+    "id": "html-guide",
+    "title": "HTML Guide for Beginners",
+    "description": "Understanding headings, paragraphs, links, images, and page structure.",
+    "date": "June 2026",
+    "file": "html-guide.html"
+  },
+  {
+    "id": "css-tips",
+    "title": "CSS Tips for Clean Design",
+    "description": "Basic CSS ideas to make a page look better and more readable.",
+    "date": "June 2026",
+    "file": "css-tips.html"
+  }
+]
