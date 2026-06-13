@@ -7,11 +7,10 @@
     "file": "javascript-basics.html"
   },
   {
-    "id": "html-guide",
-    "title": "HTML Guide for Beginners",
-    "description": "Understanding headings, paragraphs, links, images, and page structure.",
+    "id": "bits-per-byte.html",
+    "title": "Bypassing the Token Tax: Why AI Scientists Care About Bits per Byte",
     "date": "June 2026",
-    "file": "html-guide.html"
+    "file": "bits-per-byte.html"
   },
   {
     "id": "css-tips",
