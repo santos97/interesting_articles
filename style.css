@@ -288,3 +288,75 @@ body {
     font-size: 1rem;
   }
 }
+
+.profile-page {
+  width: 100%;
+}
+
+.profile-top {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 32px;
+  align-items: start;
+  margin-bottom: 42px;
+}
+
+.profile-photo-wrap {
+  width: 100%;
+}
+
+.profile-photo {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.profile-details p {
+  margin-bottom: 14px;
+  max-width: 72ch;
+}
+
+.profile-section {
+  margin-top: 10px;
+}
+
+.section-title {
+  font-size: 1.6rem;
+  line-height: 1.25;
+  margin-bottom: 20px;
+  color: #111111;
+}
+
+.experience-list {
+  display: grid;
+  gap: 26px;
+}
+
+.experience-item h3 {
+  font-size: 1.15rem;
+  margin-bottom: 6px;
+  color: #111111;
+}
+
+.experience-meta {
+  font-size: 0.96rem;
+  color: #666666;
+  margin-bottom: 8px;
+}
+
+.experience-item p {
+  margin-bottom: 8px;
+}
+
+@media (max-width: 700px) {
+  .profile-top {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .profile-photo {
+    max-width: 180px;
+  }
+}
