@@ -118,13 +118,45 @@ function renderProfile() {
   setActiveNav("profile");
   toc.innerHTML = "";
 
+  const experienceHtml = `
+    <div class="experience-list">
+      <div class="experience-item">
+        <h3>Your Job Title</h3>
+        <p class="experience-meta">Company Name · Start Date - End Date</p>
+        <p>Brief description of your responsibilities and achievements.</p>
+      </div>
+
+      <div class="experience-item">
+        <h3>Your Previous Job Title</h3>
+        <p class="experience-meta">Company Name · Start Date - End Date</p>
+        <p>Brief description of your responsibilities and achievements.</p>
+      </div>
+    </div>
+  `;
+
   app.innerHTML = `
-    <section class="page-wrap profile-box">
-      <h1 class="page-title">Profile</h1>
-      <p><strong>Name:</strong> Your Name</p>
-      <p><strong>About:</strong> I write about technology, learning, and personal ideas.</p>
-      <p><strong>Interests:</strong> Web development, JavaScript, HTML, CSS, and writing.</p>
-      <p><strong>Contact:</strong> your-email@example.com</p>
+    <section class="page-wrap profile-page">
+      <div class="profile-top">
+        <div class="profile-photo-wrap">
+          <img
+            src="./assets/profile.jpg"
+            alt="Profile photo"
+            class="profile-photo"
+          />
+        </div>
+
+        <div class="profile-details">
+          <h1 class="page-title">Your Name</h1>
+          <p><strong>About:</strong> I write about technology, learning, and personal ideas.</p>
+          <p><strong>Interests:</strong> Web development, JavaScript, HTML, CSS, and writing.</p>
+          <p><strong>Contact:</strong> your-email@example.com</p>
+        </div>
+      </div>
+
+      <div class="profile-section">
+        <h2 class="section-title">Experience</h2>
+        ${experienceHtml}
+      </div>
     </section>
   `;
 }
