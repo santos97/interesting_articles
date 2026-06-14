@@ -8,15 +8,9 @@
   },
   {
     "id": "bits-per-byte.html",
-    "title": "Bypassing the Token Tax: Why AI Scientists Care About Bits per Byte",
+    "title": "Decoding NLP: What on Earth is a Tokenizer-Agnostic Metric?",
+    "description": "Ever wonder how scientists actually measure the raw, foundational brainpower of a language model behind closed doors? Forget standard tests and exam benchmarks—the ultimate, uncheatable test forces models to play a high-stakes game of data compression. This article pulls back the curtain on Bits per Byte, the internal metric researchers use to track true machine intelligence and language understanding.",
     "date": "June 2026",
     "file": "bits-per-byte.html"
-  },
-  {
-    "id": "css-tips",
-    "title": "CSS Tips for Clean Design",
-    "description": "Basic CSS ideas to make a page look better and more readable.",
-    "date": "June 2026",
-    "file": "css-tips.html"
   }
 ]
