@@ -7,36 +7,38 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="navbar">
-    <div class="logo">santos.ai</div>
-<nav>
-  <button class="nav-link active" data-route="writings">My Writings</button>
-  <button class="nav-link" data-route="profile">Profile</button>
-  <a
-    class="nav-link external-link"
-    href="https://www.linkedin.com/in/santoshshet4/"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    LinkedIn
-  </a>
-  <a
-    class="nav-link external-link"
-    href="https://github.com/santos97"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    GitHub
-  </a>
-</nav>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">My Website</div>
+
+      <nav class="top-nav">
+        <button class="nav-link active" data-route="writings">My Writings</button>
+        <button class="nav-link" data-route="profile">Profile</button>
+        <a
+          class="nav-link external-link"
+          href="https://www.linkedin.com/in/santoshshet4/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          LinkedIn
+        </a>
+        <a
+          class="nav-link external-link"
+          href="https://github.com/santos97"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </a>
+      </nav>
+    </div>
   </header>
 
-  <main class="container">
-    <div id="app">
-      <section class="card">
-        <h1 class="page-title">Loading...</h1>
-      </section>
-    </div>
+  <main class="layout">
+    <aside class="toc" id="toc"></aside>
+    <section class="content-column">
+      <div id="app"></div>
+    </section>
   </main>
 
   <script src="script.js"></script>
