@@ -139,17 +139,17 @@ function renderProfile() {
       <div class="profile-top">
         <div class="profile-photo-wrap">
           <img
-            src="./assets/profile.jpg"
+            src="./profile.jpg"
             alt="Profile photo"
             class="profile-photo"
           />
         </div>
 
         <div class="profile-details">
-          <h1 class="page-title">Your Name</h1>
+          <h1 class="page-title">Santosh Shet</h1>
           <p><strong>About:</strong> I write about technology, learning, and personal ideas.</p>
-          <p><strong>Interests:</strong> Web development, JavaScript, HTML, CSS, and writing.</p>
-          <p><strong>Contact:</strong> your-email@example.com</p>
+          <p><strong>Interests:</strong> LLM, Language Models, Jailbraking, Context Engineering, Agents </p>
+          <p><strong>Contact:</strong> santo.shet@gmail.com</p>
         </div>
       </div>
 
