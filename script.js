@@ -1,5 +1,6 @@
 const app = document.getElementById("app");
-const navLinks = document.querySelectorAll(".nav-link");
+const toc = document.getElementById("toc");
+const navLinks = document.querySelectorAll(".nav-link[data-route]");
 
 let articles = [];
 
@@ -11,13 +12,11 @@ function setActiveNav(route) {
 
 async function loadArticlesList() {
   const response = await fetch("./articles/articles.json");
-
   if (!response.ok) {
     throw new Error("Could not load articles.json");
   }
 
   const data = await response.json();
-
   if (!Array.isArray(data)) {
     throw new Error("articles.json must contain an array");
   }
@@ -25,18 +24,82 @@ async function loadArticlesList() {
   return data;
 }
 
+function slugify(text) {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-");
+}
+
+function buildArticleTOC() {
+  const headings = app.querySelectorAll(".article-content h1, .article-content h2, .article-content h3");
+  if (!headings.length) {
+    toc.innerHTML = "";
+    return;
+  }
+
+  const usedIds = new Set();
+
+  headings.forEach((heading, index) => {
+    let baseId = slugify(heading.textContent) || `section-${index + 1}`;
+    let finalId = baseId;
+
+    let counter = 1;
+    while (usedIds.has(finalId)) {
+      finalId = `${baseId}-${counter}`;
+      counter++;
+    }
+
+    usedIds.add(finalId);
+    heading.id = finalId;
+  });
+
+  const items = Array.from(headings).map(heading => {
+    return `
+      <li>
+        <a href="#${heading.id}" class="toc-anchor">${heading.textContent}</a>
+      </li>
+    `;
+  }).join("");
+
+  toc.innerHTML = `
+    <div class="toc-title">On this page</div>
+    <ul class="toc-list">
+      ${items}
+    </ul>
+  `;
+
+  document.querySelectorAll(".toc-anchor").forEach(link => {
+    link.addEventListener("click", event => {
+      event.preventDefault();
+      const targetId = link.getAttribute("href").replace("#", "");
+      document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+}
+
 function renderWritings() {
   setActiveNav("writings");
+  toc.innerHTML = `
+    <div class="toc-title">Topics</div>
+    <ul class="toc-list">
+      ${articles.map(article => `
+        <li><a href="#article-${article.id}">${article.title}</a></li>
+      `).join("")}
+    </ul>
+  `;
 
   app.innerHTML = `
-    <section class="card">
+    <section class="page-wrap">
       <h1 class="page-title">My Writings</h1>
-      <p class="page-subtitle">Click on a topic to read the full article.</p>
+      <p class="page-subtitle">A collection of articles and notes.</p>
+
       <ul class="topic-list">
         ${articles.map(article => `
           <li class="topic-item" data-article-id="${article.id}">
-            <h2 class="topic-title">${article.title}</h2>
-            <p class="topic-desc">${article.description || ""}</p>
+            <div class="topic-title">${article.title}</div>
+            <div class="topic-desc">${article.description || ""}</div>
           </li>
         `).join("")}
       </ul>
@@ -53,9 +116,10 @@ function renderWritings() {
 
 function renderProfile() {
   setActiveNav("profile");
+  toc.innerHTML = "";
 
   app.innerHTML = `
-    <section class="card profile-box">
+    <section class="page-wrap profile-box">
       <h1 class="page-title">Profile</h1>
       <p><strong>Name:</strong> Your Name</p>
       <p><strong>About:</strong> I write about technology, learning, and personal ideas.</p>
@@ -69,10 +133,11 @@ async function renderArticle(articleId) {
   const article = articles.find(item => item.id === articleId);
 
   if (!article) {
+    toc.innerHTML = "";
     app.innerHTML = `
-      <section class="card">
+      <section class="page-wrap">
         <h1 class="page-title">Article not found</h1>
-        <button class="back-btn" onclick="location.hash='writings'">Back to My Writings</button>
+        <p class="muted-text">The requested article could not be found.</p>
       </section>
     `;
     return;
@@ -80,7 +145,6 @@ async function renderArticle(articleId) {
 
   try {
     const response = await fetch(`./articles/${article.file}`);
-
     if (!response.ok) {
       throw new Error("Article file not found");
     }
@@ -90,19 +154,22 @@ async function renderArticle(articleId) {
     setActiveNav("writings");
 
     app.innerHTML = `
-      <section class="card">
-        <button class="back-btn" onclick="location.hash='writings'">← Back to My Writings</button>
+      <article class="article-shell">
+        <a class="back-link" href="#writings">← Back to My Writings</a>
         <h1 class="article-title">${article.title}</h1>
         <p class="article-meta">${article.date || ""}</p>
         <div class="article-content">
           ${articleHtml}
         </div>
-      </section>
+      </article>
     `;
+
+    buildArticleTOC();
   } catch (error) {
+    toc.innerHTML = "";
     app.innerHTML = `
-      <section class="card">
-        <button class="back-btn" onclick="location.hash='writings'">← Back to My Writings</button>
+      <section class="page-wrap">
+        <a class="back-link" href="#writings">← Back to My Writings</a>
         <h1 class="article-title">${article.title}</h1>
         <p class="error-text">Could not load the article content.</p>
       </section>
@@ -146,10 +213,11 @@ async function init() {
     window.addEventListener("hashchange", router);
     await router();
   } catch (error) {
+    toc.innerHTML = "";
     app.innerHTML = `
-      <section class="card">
+      <section class="page-wrap">
         <h1 class="page-title">Setup error</h1>
-        <p class="page-subtitle">Could not load the article list.</p>
+        <p class="muted-text">Could not load the article list.</p>
         <p class="error-text">Make sure articles/articles.json exists and is valid JSON.</p>
       </section>
     `;
